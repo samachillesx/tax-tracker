@@ -7,7 +7,5 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-            - uses: actions/checkout@v4
-
             - name: Say Hello
-              run: echo "Hello from the second workflow!"
+              run: echo "This is it. Hello from the second workflow!"
