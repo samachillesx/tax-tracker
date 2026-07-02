@@ -1,0 +1,35 @@
+name: Inputs_Parameters
+
+on:
+    # push
+    workflow_dispatch
+
+env: # example of global level env, which means run globally
+    GLOBAL_APP_ENV: global-env
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        env: # example of job level env
+            JOB_APP_ENV: job-env
+
+        steps:
+            - name: Say Hello
+              run: echo "This is it. Hello from the second workflow!"
+
+            - name: Install
+              env: # example of step level env
+                    APP_ENV: dev_new
+                    DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+              run: echo "Environment $APP_ENV using $DB_PASSWORD, $GLOBAL_APP_ENV, $JOB_APP_ENV"
+
+            - name: Create demo file
+              run: | # pipe sign runs multiple commands in a single step
+                  echo "Hello from CI Pipeline" > demo.txt
+                  echo "File created successfully"
+
+            - name: Upload Demo
+              uses: actions/upload-artifact@v7
+              with:
+                name: build-artifacts-demo
+                path: .
