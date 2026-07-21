@@ -1,4 +1,4 @@
-name: Node APP
+name: Node APP CI
 
 on:
     # push
